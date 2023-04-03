@@ -9,7 +9,7 @@ let usercard = document.getElementById("usercard");
 
 let p = document.createElement("p");
 
-console.log(`${tg}`)
+console.log(`${tg.initDataUnsafe}`)
 
 p.innerText = `${tg.initDataUnsafe.user.first_name}
 ${tg.initDataUnsafe.user.first_name}`
