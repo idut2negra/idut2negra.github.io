@@ -14,7 +14,7 @@ ${tg.initDataUnsafe.user.first_name}`
 
 usercard.appendChild(p)
 
-console.log(`${tg.initDataUnsafe.user.first_name}`)
+console.log(`${tg}`)
 
 let item = "";
 
