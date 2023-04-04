@@ -21,6 +21,7 @@ let item = "";
 let btn1 = document.getElementById("btn1");
 
 btn1.addEventListener("click", function(){
+	tg.sendData("пенисы");
 	if (tg.MainButton.isVisible) {
 		tg.MainButton.hide();
 	}
