@@ -156,16 +156,20 @@
 		buy.addEventListener("click", () => {
 			document.getElementById("main").style.display = "none";
 			document.getElementById("form").style.display = "block";
-			document.getElementById("user_name").value = tg.initDataUnsafe.user.first_name + " " + tg.initDataUnsafe.user.last_name
 		});
 
 		order.addEventListener("click", () => {
+			let order_from = document.getElementById("order_from").value;
+			let order_link = document.getElementById("order_link").value;
+			let order_name = document.getElementById("order_name").value;
+			let order_city = document.getElementById("order_city").value;
+			let order_address = document.getElementById("order_address").value;
 			let data = {
-				order_from: document.getElementById("order_from").value,
-				order_link: document.getElementById("order_link").value,
-				order_name: document.getElementById("order_name").value,
-				order_city: document.getElementById("order_city").value,
-				order_address: document.getElementById("order_address").value,
+				order_from: order_from,
+				order_link: order_link,
+				order_name: order_name,
+				order_city: order_city,
+				order_address: order_address
 			}
 			tg.sendData(JSON.stringify(data));
 			tg.close();
