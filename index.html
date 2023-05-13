@@ -144,10 +144,12 @@
 			<h3 style="">Ваш адрес:</h3>
 			<input class="input_text" type="text" placeholder="Улица, дом" id="order_address">
 		</div>
-		<button id="order">Оформить заказ</button>
+		<p id="error" style="color: red;"></p>
+		<button type="button" id="order">Оформить заказ</button>
 	</form>
 	<script src="https://telegram.org/js/telegram-web-app.js"></script>
 	<script>
+		document.getElementById("error").innerText = "";
 		let tg = window.Telegram.WebApp;
 		let buy = document.getElementById("buy");
 		let order = document.getElementById("order");
@@ -159,12 +161,44 @@
 		});
 
 		order.addEventListener("click", () => {
+			let order_from = ""
+			if (document.getElementById("radio-1").checked == true) {
+				order_from = "TaoBao";
+			}
+			if (document.getElementById("radio-2").checked == true) {
+				order_from = "Poizon";
+			}
+			let order_link = document.getElementById("order_link").value;
+			let order_name = document.getElementById("order_name").value;
+			let order_city = document.getElementById("order_city").value;
+			let order_address = document.getElementById("order_address").value;
+			
+			if (order_from.length < 1) {
+				document.getElementById("error").innerText = "\n\nВы не выбрали сервис.";
+				return
+			};
+			if (order_link.length < 1) {
+				document.getElementById("error").innerText = "\n\nВы не вставили ссылку на товар.";
+				return
+			};
+			if (order_name.length < 1) {
+				document.getElementById("error").innerText = "\n\nВы не написали ФИО.";
+				return
+			};
+			if (order_city.length < 1) {
+				document.getElementById("error").innerText = "\n\nВы не указали свой город.";
+				return
+			};
+			if (order_address.length < 1) {
+				document.getElementById("error").innerText = "\n\nВы не указали свой адрес.";
+				return
+			};
 			let data = {
-				order_from: document.getElementById("radio-1").value + document.getElementById("radio-2").value,
-				order_link: document.getElementById("order_link").value,
-				order_name: document.getElementById("order_name").value,
-				order_city: document.getElementById("order_city").value,
-				order_address: document.getElementById("order_address").value
+				order_from: order_from,
+				order_link: order_link,
+				order_name: order_name,
+				order_city: order_city,
+				order_address: order_address,
 			}
 			tg.sendData(JSON.stringify(data));
 			tg.close();
