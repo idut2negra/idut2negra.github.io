@@ -160,14 +160,12 @@
 		});
 
 		order.addEventListener("click", () => {
-			let name = document.getElementById("user_name").value;
-			let email = document.getElementById("user_email").value;
-			let phone = document.getElementById("user_phone").value;
-
 			let data = {
-				name: name,
-				email: email,
-				phone: phone
+				order_from: document.getElementById("order_from").value,
+				order_link: document.getElementById("order_link").value,
+				order_name: document.getElementById("order_name").value,
+				order_city: document.getElementById("order_city").value,
+				order_address: document.getElementById("order_address").value,
 			}
 			tg.sendData(JSON.stringify(data));
 			tg.close();
