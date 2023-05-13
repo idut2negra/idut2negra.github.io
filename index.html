@@ -88,6 +88,7 @@
 			font-size: 14px;
 			border: 2px solid silver;
 			border-radius: 5px;
+			margin-top: 2px;
 		}
 		.input_text input:focus {
 			display: none;
@@ -122,12 +123,20 @@
 					<input id="radio-2" type="radio" name="order_from" value="Poizon">
 					<label for="radio-2">Poizon</label>
 				</div>
+				<div class="form_radio_group-item">
+					<input id="radio-3" type="radio" name="order_from" value="Xiaomi">
+					<label for="radio-3">Xiaomi</label>
+				</div>
 			</div>
 		</div>
 		<br>
 		<div style="">
 			<h3 style="">Ссылка на заказ:</h3>
 			<input class="input_text" type="text" placeholder="Введите ссылку на товар" id="order_link">
+			<input style="display: none;" class="input_text" type="text" placeholder="Добавьте еще" id="order_link_2">
+			<input style="display: none;" class="input_text" type="text" placeholder="Добавьте еще" id="order_link_3">
+			<input style="display: none;" class="input_text" type="text" placeholder="Добавьте еще" id="order_link_4">
+			<input style="display: none;" class="input_text" type="text" placeholder="Добавьте еще" id="order_link_5">
 		</div>
 		<br>
 		<div style="">
@@ -160,6 +169,27 @@
 			document.getElementById("form").style.display = "block";
 		});
 
+		let order_elem = null;
+		order_link.addEventListener("input", () => {
+			order_elem = document.getElementById("order_link_2")
+		});
+		order_link_2.addEventListener("input", () => {
+			order_elem = document.getElementById("order_link_3")
+		});
+		order_link_3.addEventListener("input", () => {
+			order_elem = document.getElementById("order_link_4")
+		});
+		order_link_4.addEventListener("input", () => {
+			order_elem = document.getElementById("order_link_5")
+		});
+		document.addEventListener("input", () => {
+			if (order_elem != null) {
+				order_elem.style.display = "inline-block"
+				order_elem.style.transition = "1s ease"
+				order_elem = null
+			};
+		});
+
 		order.addEventListener("click", () => {
 			let order_from = ""
 			if (document.getElementById("radio-1").checked == true) {
@@ -168,11 +198,14 @@
 			if (document.getElementById("radio-2").checked == true) {
 				order_from = "Poizon";
 			}
-			let order_link = document.getElementById("order_link").value;
+			if (document.getElementById("radio-3").checked == true) {
+				order_from = "Xiaomi";
+			}
+			let order_link = document.getElementById("order_link").value + "\n" + document.getElementById("order_link_2").value + "\n" + document.getElementById("order_link_3").value + "\n" + document.getElementById("order_link_4").value + "\n" + document.getElementById("order_link_5").value;
 			let order_name = document.getElementById("order_name").value;
 			let order_city = document.getElementById("order_city").value;
 			let order_address = document.getElementById("order_address").value;
-			
+
 			if (order_from.length < 1) {
 				document.getElementById("error").innerText = "\n\nВы не выбрали сервис.";
 				return
