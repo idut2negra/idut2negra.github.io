@@ -8,8 +8,6 @@
 	<style>
 		@import url('https://fonts.googleapis.com/css?family=Montserrat:wght@200;500&display=swap')
 		* {
-			margin: 0;
-			padding: 0;
 			box-sizing: border-box;
 		}
 		body {
@@ -31,7 +29,7 @@
 		}
 		p {
 			width: 350px;
-			margin: 0 auto;
+			margin: auto;
 		}
 		button {
 			border: 0;
@@ -53,17 +51,46 @@
 			display: none;
 			text-align: center;
 		}
-		input {
+		.form_radio_group {
+			display: inline-block;
+			overflow: hidden;
+		}
+		.form_radio_group-item {
+			display: inline-block;
+			float: left;    
+		}
+		.form_radio_group input[type=radio] {
+			display: none;
+		}
+		.form_radio_group label {
+			display: inline-block;
+			cursor: pointer;
+			padding: 0px 60px;
+			line-height: 34px;
+			border: 1px solid #999;
+			border-right: none;
+			user-select: none;
+		}
+		.form_radio_group .form_radio_group-item:first-child label {
+			border-radius: 6px 0 0 6px;
+		}
+		.form_radio_group .form_radio_group-item:last-child label {
+			border-radius: 0 6px 6px 0;
+			border-right: 1px solid #999;
+		}
+		.form_radio_group input[type=radio]:checked + label {
+			background: #ffe0a6;
+		}
+		.input_text {
 			width: 90%;
 			outline: none;
-			margin: 10px;
 			padding: 15px 10px;
 			font-size: 14px;
 			border: 2px solid silver;
 			border-radius: 5px;
 		}
-		input:focus {
-			border-color: #db5d5d;
+		.input_text input:focus {
+			display: none;
 		}
 	</style>
 </head>
@@ -75,10 +102,49 @@
 		<button id="buy">Заказать</button>
 	</div>
 	<form id="form">
-		<input type="text" placeholder="Имя" id="user_name">
-		<input type="text" placeholder="email" id="user_email">
-		<input type="text" placeholder="phone" id="user_phone">
-		<button id="order">Оформить</button>
+		<!--<div>
+			<p>Выберите площадку:</p>
+			<div style="display: flex; justify-content: center;">
+				<p style="background-color: #FADBFE; margin: 10px;"><input type="radio" name="order_from">TaoBao</p>
+				<p style="background-color: #FADBFE; margin: 10px;"><input type="radio" name="order_from">Poizon</p>
+			</div>
+		</div>-->
+		<img src="data/order_icon.png">
+		<br>
+		<div style="">
+			<h3 style="">Выберите сервис:</h3>
+			<div class="form_radio_group">
+				<div class="form_radio_group-item">
+					<input id="radio-1" type="radio" name="order_from" value="TaoBao">
+					<label for="radio-1">TaoBao</label>
+				</div>
+				<div class="form_radio_group-item">
+					<input id="radio-2" type="radio" name="order_from" value="Poizon">
+					<label for="radio-2">Poizon</label>
+				</div>
+			</div>
+		</div>
+		<br>
+		<div style="">
+			<h3 style="">Ссылка на заказ:</h3>
+			<input type="text" placeholder="Введите ссылку на товар" id="order_link">
+		</div>
+		<br>
+		<div style="">
+			<h3 style="">Ваше ФИО:</h3>
+			<input type="text" placeholder="Фамилия Имя Отчество" id="order_name">
+		</div>
+		<br>
+		<div style="">
+			<h3 style="">Ваш город:</h3>
+			<input type="text" placeholder="Город" id="order_city">
+		</div>
+		<br>
+		<div style="">
+			<h3 style="">Ваш адрес:</h3>
+			<input type="text" placeholder="Улица, дом" id="order_address">
+		</div>
+		<button id="order">Оформить заказ</button>
 	</form>
 	<script src="https://telegram.org/js/telegram-web-app.js"></script>
 	<script>
@@ -90,18 +156,20 @@
 		buy.addEventListener("click", () => {
 			document.getElementById("main").style.display = "none";
 			document.getElementById("form").style.display = "block";
-			document.getElementById("user_name").value = tg.initDataUnsafe.user.first_name + " " + tg.initDataUnsafe.user.last_name
 		});
 
 		order.addEventListener("click", () => {
-			let name = document.getElementById("user_name").value;
-			let email = document.getElementById("user_email").value;
-			let phone = document.getElementById("user_phone").value;
-
+			let order_from = document.getElementById("order_from").value;
+			let order_link = document.getElementById("order_link").value;
+			let order_name = document.getElementById("order_name").value;
+			let order_city = document.getElementById("order_city").value;
+			let order_address = document.getElementById("order_address").value;
 			let data = {
-				name: name,
-				email: email,
-				phone: phone
+				order_from: order_from,
+				order_link: order_link,
+				order_name: order_name,
+				order_city: order_city,
+				order_address: order_address
 			}
 			tg.sendData(JSON.stringify(data));
 			tg.close();
