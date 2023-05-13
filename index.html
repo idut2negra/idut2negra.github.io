@@ -127,22 +127,22 @@
 		<br>
 		<div style="">
 			<h3 style="">Ссылка на заказ:</h3>
-			<input type="text" placeholder="Введите ссылку на товар" id="order_link">
+			<input class="input_text" type="text" placeholder="Введите ссылку на товар" id="order_link">
 		</div>
 		<br>
 		<div style="">
 			<h3 style="">Ваше ФИО:</h3>
-			<input type="text" placeholder="Фамилия Имя Отчество" id="order_name">
+			<input class="input_text" type="text" placeholder="Фамилия Имя Отчество" id="order_name">
 		</div>
 		<br>
 		<div style="">
 			<h3 style="">Ваш город:</h3>
-			<input type="text" placeholder="Город" id="order_city">
+			<input class="input_text" type="text" placeholder="Город" id="order_city">
 		</div>
 		<br>
 		<div style="">
 			<h3 style="">Ваш адрес:</h3>
-			<input type="text" placeholder="Улица, дом" id="order_address">
+			<input class="input_text" type="text" placeholder="Улица, дом" id="order_address">
 		</div>
 		<button id="order">Оформить заказ</button>
 	</form>
@@ -159,17 +159,12 @@
 		});
 
 		order.addEventListener("click", () => {
-			let order_from = document.getElementById("order_from").value;
-			let order_link = document.getElementById("order_link").value;
-			let order_name = document.getElementById("order_name").value;
-			let order_city = document.getElementById("order_city").value;
-			let order_address = document.getElementById("order_address").value;
 			let data = {
-				order_from: order_from,
-				order_link: order_link,
-				order_name: order_name,
-				order_city: order_city,
-				order_address: order_address
+				order_from: document.getElementById("radio-1").value + document.getElementById("radio-2").value,
+				order_link: document.getElementById("order_link").value,
+				order_name: document.getElementById("order_name").value,
+				order_city: document.getElementById("order_city").value,
+				order_address: document.getElementById("order_address").value
 			}
 			tg.sendData(JSON.stringify(data));
 			tg.close();
