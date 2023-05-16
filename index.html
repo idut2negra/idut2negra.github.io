@@ -195,12 +195,12 @@
 	</form>
 	<div class="modal fade" id="calculator" tabindex="-1" aria-labelledby="calculator_label" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-			<div class="modal-content" style="background: var(--th-theme-bg-color)">
-				<div class="modal-header">
+			<div class="modal-content" style="background: var(--tg-theme-bg-color)">
+				<div class="modal-header" style="background: var(--tg-theme-bg-color)">
 					<h5 class="modal-title" id="calculator_label">Калькулятор</h5>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
-				<div class="modal-body">
+				<div class="modal-body" style="background: var(--tg-theme-bg-color)">
 					<div class="row">
 						<input class="input_text col" type="number" placeholder="Вес (КГ)" min="0" step=0.1 id="calculator_mass">
 						<input class="input_text col" type="number" placeholder="Цена CNY" min="1" id="calculator_price">
@@ -208,7 +208,7 @@
 					<br>
 					<h2 id="calculator_result_text" style="display: none;"></h2>
 				</div>
-				<div class="modal-footer">
+				<div class="modal-footer" style="background: var(--tg-theme-bg-color)">
 					<button type="button" class="btn btn-primary col" id="calculator_result">Посчитать</button>
 				</div>
 			</div>
