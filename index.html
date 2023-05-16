@@ -236,6 +236,7 @@
 				order_from = "Xiaomi";
 			}
 			let order_link = document.getElementById("order_link").value + "\n" + document.getElementById("order_link_2").value + "\n" + document.getElementById("order_link_3").value + "\n" + document.getElementById("order_link_4").value + "\n" + document.getElementById("order_link_5").value;
+			let order_link_count = document.getElementById("order_link_count").value + "\n" + document.getElementById("order_link_2_count").value + "\n" + document.getElementById("order_link_3_count").value + "\n" + document.getElementById("order_link_4_count").value + "\n" + document.getElementById("order_link_5_count").value;
 			let order_name = document.getElementById("order_name").value;
 			let order_city = document.getElementById("order_city").value;
 			let order_address = document.getElementById("order_address").value;
@@ -266,6 +267,7 @@
 				order_name: order_name,
 				order_city: order_city,
 				order_address: order_address,
+				order_link_count: order_link_count,
 			}
 			tg.sendData(JSON.stringify(data));
 			tg.close();
