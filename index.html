@@ -186,6 +186,11 @@
 			<h3 style="">Ваш адрес:</h3>
 			<input class="input_text col-12" type="text" placeholder="Улица, дом" id="order_address">
 		</div>
+		<br>
+		<div class="">
+			<h3 style="">Комментарий к заказу:</h3>
+			<input class="input_text col-12" type="text" placeholder="Комментарий, например, ваш телефон" id="order_comment">
+		</div>
 		<p id="error" style="color: red;"></p>
 		<br><br>
 		<div class="row">
@@ -280,6 +285,7 @@
 			let order_name = document.getElementById("order_name").value;
 			let order_city = document.getElementById("order_city").value;
 			let order_address = document.getElementById("order_address").value;
+			let order_comment = document.getElementById("order_comment").value;
 
 			if (order_from.length < 1) {
 				document.getElementById("error").innerText = "\n\nВы не выбрали сервис.";
@@ -312,6 +318,7 @@
 				order_city: order_city,
 				order_address: order_address,
 				order_link_count: order_link_count,
+				order_comment: order_comment,
 			}
 			tg.sendData(JSON.stringify(data));
 			tg.close();
