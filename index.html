@@ -227,8 +227,8 @@
 		let buy = document.getElementById("buy");
 		let order = document.getElementById("order");
 		let calculator = document.getElementById("calculator_result");
-		const kg_cost = 1;
-		const CNY_to_USDT_exc = 10;
+		const kg_cost = 500;
+		const CNY_to_RUB_exc = 13;
 		tg.expand();
 
 		buy.addEventListener("click", () => {
@@ -243,7 +243,7 @@
 				return
 			}
 			result = document.getElementById("calculator_result_text");
-			result.innerText = String((price * CNY_to_USDT_exc) + (mass * kg_cost)) + " USDT";
+			result.innerText = String((price * CNY_to_RUB_exc) + (mass * kg_cost)) + " RUB";
 			result.style.display = "block";
 		});
 
@@ -280,8 +280,8 @@
 			if (document.getElementById("radio-3").checked == true) {
 				order_from = "Xiaomi";
 			}
-			let order_link = document.getElementById("order_link").value + "\n" + document.getElementById("order_link_2").value + "\n" + document.getElementById("order_link_3").value + "\n" + document.getElementById("order_link_4").value + "\n" + document.getElementById("order_link_5").value;
-			let order_link_count = document.getElementById("order_link_count").value + "\n" + document.getElementById("order_link_2_count").value + "\n" + document.getElementById("order_link_3_count").value + "\n" + document.getElementById("order_link_4_count").value + "\n" + document.getElementById("order_link_5_count").value;
+			let order_link = [document.getElementById("order_link").value, document.getElementById("order_link_2").value, document.getElementById("order_link_3").value, document.getElementById("order_link_4").value, document.getElementById("order_link_5").value]
+			let order_link_count = [document.getElementById("order_link_count").value, document.getElementById("order_link_2_count").value, document.getElementById("order_link_3_count").value, document.getElementById("order_link_4_count").value, document.getElementById("order_link_5_count").value]
 			let order_name = document.getElementById("order_name").value;
 			let order_city = document.getElementById("order_city").value;
 			let order_address = document.getElementById("order_address").value;
