@@ -196,7 +196,7 @@
 			<h3 style="">Номер для связи:</h3>
 			<input class="input_text col-12" type="text" placeholder="Номер телефона" id="order_ind_phone">
 		</div>
-		<p id="error" style="color: red;"></p>
+		<p id="error_ind" style="color: red;"></p>
 		<br><br>
 		<div class="row">
 			<button type="button" class="col" id="order_ind">Оформить заказ</button>
@@ -345,15 +345,15 @@
 			let order_ind_phone = document.getElementById("order_ind_phone").value;
 
 			if (order_ind_about.length < 1) {
-				document.getElementById("error").innerText = "\n\nВы не написали информацию.";
+				document.getElementById("error_ind").innerText = "\n\nВы не написали информацию.";
 				return
 			};
 			if (order_ind_link.length < 1) {
-				document.getElementById("error").innerText = "\n\nВы не указали пример.";
+				document.getElementById("error_ind").innerText = "\n\nВы не указали пример.";
 				return
 			};
 			if (order_ind_link.length < 1) {
-				document.getElementById("error").innerText = "\n\nВы не указали телефон для связи.";
+				document.getElementById("error_ind").innerText = "\n\nВы не указали телефон для связи.";
 				return
 			};
 			let data = {
