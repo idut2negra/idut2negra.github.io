@@ -52,6 +52,10 @@
 			display: none;
 			text-align: center;
 		}
+		#form_ind {
+			display: none;
+			text-align: center;
+		}
 		.form_radio_group {
 			display: inline-block;
 			overflow: hidden;
@@ -102,34 +106,11 @@
 		<img src="data/box_icon.png">
 		<p>Как заказать товар из Китая без посредников и наценок? Да хуй его знает, сам не ебу, если честно.</p>
 		<button id="buy">Заказать</button>
+		<button id="buy_ind">Индивидуальный заказ</button>
 	</div>
 	<form id="form" class="container">
-		<!--<div>
-			<p>Выберите площадку:</p>
-			<div style="display: flex; justify-content: center;">
-				<p style="background-color: #FADBFE; margin: 10px;"><input type="radio" name="order_from">TaoBao</p>
-				<p style="background-color: #FADBFE; margin: 10px;"><input type="radio" name="order_from">Poizon</p>
-			</div>
-		</div>-->
 		<img src="data/order_icon.png">
 		<br>
-		<!--<div style="">
-			<h3 style="">Выберите сервис:</h3>
-			<div class="form_radio_group">
-				<div class="form_radio_group-item">
-					<input id="radio-1" type="radio" name="order_from" value="TaoBao">
-					<label for="radio-1">TaoBao</label>
-				</div>
-				<div class="form_radio_group-item">
-					<input id="radio-2" type="radio" name="order_from" value="Poizon">
-					<label for="radio-2">Poizon</label>
-				</div>
-				<div class="form_radio_group-item">
-					<input id="radio-3" type="radio" name="order_from" value="Xiaomi">
-					<label for="radio-3">Xiaomi</label>
-				</div>
-			</div>
-		</div>-->
 		<div class="">
 			<h3 style="">Выберите сервис:</h3>
 			<div class="form_radio_group">
@@ -198,6 +179,29 @@
 			<button type="button" class="col" data-bs-toggle="modal" data-bs-target="#calculator">Калькулятор</button>
 		</div>
 	</form>
+	<form id="form_ind" class="container">
+		<img src="data/order_icon.png">
+		<br>
+		<div class="">
+			<h3 style="">Подробно опишите товар:</h3>
+			<input class="input_text col-12" type="text" placeholder="Ссылка, количество и прочая информация" id="order_ind_about">
+		</div>
+		<br>
+		<div class="">
+			<h3 style="">Ссылка на пример:</h3>
+			<input class="input_text col-12" type="text" placeholder="Ссылка на пример либо картинку на фотохостинге" id="order_ind_link">
+		</div>
+		<br>
+		<div class="">
+			<h3 style="">Номер для связи:</h3>
+			<input class="input_text col-12" type="text" placeholder="Номер телефона" id="order_ind_phone">
+		</div>
+		<p id="error" style="color: red;"></p>
+		<br><br>
+		<div class="row">
+			<button type="button" class="col" id="order_ind">Оформить заказ</button>
+		</div>
+	</form>
 	<div class="modal fade" id="calculator" tabindex="-1" aria-labelledby="calculator_label" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
 			<div class="modal-content">
@@ -225,8 +229,11 @@
 		document.getElementById("error").innerText = "";
 		let tg = window.Telegram.WebApp;
 		let buy = document.getElementById("buy");
+		let buy_ind = document.getElementById("buy_ind");
 		let order = document.getElementById("order");
+		let order_ind = document.getElementById("order_ind");
 		let calculator = document.getElementById("calculator_result");
+		let type = null
 		const kg_cost = 500;
 		const CNY_to_RUB_exc = 13;
 		tg.expand();
@@ -234,6 +241,13 @@
 		buy.addEventListener("click", () => {
 			document.getElementById("main").style.display = "none";
 			document.getElementById("form").style.display = "block";
+			type = 0
+		})
+
+		buy_ind.addEventListener("click", () => {
+			document.getElementById("main").style.display = "none";
+			document.getElementById("form_ind").style.display = "block";
+			type = 1
 		})
 
 		calculator.addEventListener("click", () => {
@@ -319,6 +333,34 @@
 				order_address: order_address,
 				order_link_count: order_link_count,
 				order_comment: order_comment,
+				order_type: 0,
+			}
+			tg.sendData(JSON.stringify(data));
+			tg.close();
+		});
+
+		order_ind.addEventListener("click", () => {
+			let order_ind_about = document.getElementById("order_ind_about").value;
+			let order_ind_link = document.getElementById("order_ind_link").value;
+			let order_ind_phone = document.getElementById("order_ind_phone").value;
+
+			if (order_ind_about.length < 1) {
+				document.getElementById("error").innerText = "\n\nВы не написали информацию.";
+				return
+			};
+			if (order_ind_link.length < 1) {
+				document.getElementById("error").innerText = "\n\nВы не указали пример.";
+				return
+			};
+			if (order_ind_link.length < 1) {
+				document.getElementById("error").innerText = "\n\nВы не указали телефон для связи.";
+				return
+			};
+			let data = {
+				order_ind_about: order_ind_about,
+				order_ind_link: order_ind_link,
+				order_ind_phone: order_ind_phone,
+				order_type: 1,
 			}
 			tg.sendData(JSON.stringify(data));
 			tg.close();
