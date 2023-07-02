@@ -27,6 +27,7 @@
 		img {
 			width: 70px;
 			margin: 30px auto;
+			pointer-events: none;
 		}
 		p {
 			width: 350px;
@@ -103,13 +104,13 @@
 <body>
 	<div id="main">
 		<h1>ServiceName</h1>
-		<img src="data/box_icon.png">
-		<p>Как заказать товар из Китая без посредников и наценок? Да хуй его знает, сам не ебу, если честно.</p>
+		<img src="data/box_icon.png" draggable="false" style="pointer-events: none;">
+		<p>Закажите товар из Китая по самым выгодным ценам.</p>
 		<button id="buy">Заказать</button>
 		<button id="buy_ind">Индивидуальный заказ</button>
 	</div>
 	<form id="form" class="container">
-		<img src="data/order_icon.png">
+		<img src="data/order_icon.png" draggable="false" style="pointer-events: none;">
 		<br>
 		<div class="">
 			<h3 style="">Выберите сервис:</h3>
@@ -180,7 +181,7 @@
 		</div>
 	</form>
 	<form id="form_ind" class="container">
-		<img src="data/order_icon.png">
+		<img src="data/order_icon.png" draggable="false" style="pointer-events: none;">
 		<br>
 		<div class="">
 			<h3 style="">Подробно опишите товар:</h3>
